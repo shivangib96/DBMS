@@ -1,0 +1,223 @@
+CREATE TABLE PROGRAMMER (EmpNo NUMBER(5) PRIMARY KEY,
+  2  ProjId CHAR(5) NOT NULL,
+  3  LastName VARCHAR(30),
+  4  FirstName VARCHAR(30),
+  5  HireDate DATE,
+  6  Language VARCHAR(15),
+  7  TaskNo NUMBER(2),
+  8  Privilege VARCHAR(25) NULL);
+
+Table created.
+
+SQL> INSERT INTO PROGRAMMER VALUES(201,'Gupta','Saurav',TO_DATE('1/1/1995','MM/DD/YYYY'),'NPR','VB',52,'Secret');
+INSERT INTO PROGRAMMER VALUES(201,'Gupta','Saurav',TO_DATE('1/1/1995','MM/DD/YYYY'),'NPR','VB',52,'Secret')
+                                                                                    *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL> INSERT INTO PROGRAMMER VALUES(201,'NPR','Gupta','Saurav',TO_DATE('1/1/1995','MM/DD/YYYY'),'VB',52,'Secret');
+
+1 row created.
+
+SQL> INSERT INTO PROGRAMMER VALUES(390,'KCW','Ghosh','Pinky',TO_DATE('1/5/1993','MM/DD/YYYY'),'Java',11,'Top Secret');
+
+1 row created.
+
+SQL> INSERT INTO PROGRAMMER VALUES(789,'RNC','Agrawal','Praveen',TO_DATE('8/31/1998','MM/DD/YYYY'),'VB',11,'Secret');
+
+1 row created.
+
+SQL> INSERT INTO PROGRAMMER VALUES(134,'TIPPS','Chaudhary','Supriyo',TO_DATE('7/15/1995','MM/DD/YYYY'),'C++',52,'Secret');
+
+1 row created.
+
+SQL> SELECT * FROM PROGRAMMER;
+
+     EMPNO PROJI LASTNAME                       FIRSTNAME
+---------- ----- ------------------------------ ------------------------------
+HIREDATE  LANGUAGE            TASKNO PRIVILEGE
+--------- --------------- ---------- -------------------------
+       201 NPR   Gupta                          Saurav
+01-JAN-95 VB                      52 Secret
+
+       390 KCW   Ghosh                          Pinky
+05-JAN-93 Java                    11 Top Secret
+
+       789 RNC   Agrawal                        Praveen
+31-AUG-98 VB                      11 Secret
+
+
+     EMPNO PROJI LASTNAME                       FIRSTNAME
+---------- ----- ------------------------------ ------------------------------
+HIREDATE  LANGUAGE            TASKNO PRIVILEGE
+--------- --------------- ---------- -------------------------
+       134 TIPPS Chaudhary                      Supriyo
+15-JUL-95 C++                     52 Secret
+
+
+SQL> CREATE TABLE WEATHER (CITY VARCHAR(15),
+  2  STATE VARCHAR(20),
+  3  HIGH NUMBER(3),
+  4  LOW NUMBER (3),
+  5  EX NUMBER(1));
+
+Table created.
+
+SQL> ALTER TABLE WEATHER DROP  COLUMN EX;
+
+Table altered.
+
+SQL> DESC WEATHER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CITY                                               VARCHAR2(15)
+ STATE                                              VARCHAR2(20)
+ HIGH                                               NUMBER(3)
+ LOW                                                NUMBER(3)
+
+SQL> INSERT INTO WEATHER VALUES('Calcutta', 'West Bengal',105,90);
+
+1 row created.
+
+SQL> INSERT INTO WEATHER VALUES('Trivandrum','Kerela',101,92);
+
+1 row created.
+
+SQL> INSERT INTO WEATHER VALUES('Mumbai','Maharashtra',88,69);
+
+1 row created.
+
+SQL> INSERT INTO WEATHER VALUES('Banglore','Karnataka',77,60);
+
+1 row created.
+
+SQL> alter table weather modify(state varchar(20) null);
+alter table weather modify(state varchar(20) null)
+                           *
+ERROR at line 1:
+ORA-01451: column to be modified to NULL cannot be modified to NULL
+
+
+SQL> alter table weather modify constarints(state null);
+alter table weather modify constarints(state null)
+                                      *
+ERROR at line 1:
+ORA-00902: invalid datatype
+
+
+SQL> alter table weather modify constarints(state varchar(20) null);
+alter table weather modify constarints(state varchar(20) null)
+                                      *
+ERROR at line 1:
+ORA-00902: invalid datatype
+
+
+SQL> desc weather;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CITY                                               VARCHAR2(15)
+ STATE                                              VARCHAR2(20)
+ HIGH                                               NUMBER(3)
+ LOW                                                NUMBER(3)
+
+SQL> select * from weather;
+
+CITY            STATE                      HIGH        LOW
+--------------- -------------------- ---------- ----------
+Calcutta        West Bengal                 105         90
+Trivandrum      Kerela                      101         92
+Mumbai          Maharashtra                  88         69
+Banglore        Karnataka                    77         60
+
+SQL> CREATE TABLE BOOKS (BookId NUMBER(4) PRIMARY KEY,
+  2  Title CHAR(4),
+  3  TopicId CHAR(6),
+  4  PublisherName VARCHAR(30),
+  5  PlaceOfPublication VARCHAR(30),
+  6  Price NUMBER(3),
+  7  PurchaseDate DATE,
+  8  ShelfNo CHAR(3));
+
+Table created.
+
+SQL> INSERT INTO BOOKS VALUES(8293,'DBMS','DB1','Prentice Hall','Mumbai',255, TO_DATE('1/1/1995','MM/DD/YYYY'),'S11');
+
+1 row created.
+
+SQL> INSERT INTO BOOKS VALUES(5645,'DBMS','DB1','Pearson Education','Mumbai',655, TO_DATE('1/5/1993','MM/DD/YYYY'),'S12');
+
+1 row created.
+
+SQL> INSERT INTO BOOKS VALUES(6565,'C','C1','TMH','Mumbai',840, TO_DATE('8/31/1998','MM/DD/YYYY'),'S66');
+
+1 row created.
+
+SQL> INSERT INTO BOOKS VALUES(6567,'C++','Cplus1','ABC Publisher','Delhi',300, TO_DATE('7/15/1995','MM/DD/YYYY'),'S77');
+
+1 row created.
+
+SQL> select* from books;
+
+    BOOKID TITL TOPICI PUBLISHERNAME
+---------- ---- ------ ------------------------------
+PLACEOFPUBLICATION                  PRICE PURCHASED SHE
+------------------------------ ---------- --------- ---
+      8293 DBMS DB1    Prentice Hall
+Mumbai                                255 01-JAN-95 S11
+
+      5645 DBMS DB1    Pearson Education
+Mumbai                                655 05-JAN-93 S12
+
+      6565 C    C1     TMH
+Mumbai                                840 31-AUG-98 S66
+
+
+    BOOKID TITL TOPICI PUBLISHERNAME
+---------- ---- ------ ------------------------------
+PLACEOFPUBLICATION                  PRICE PURCHASED SHE
+------------------------------ ---------- --------- ---
+      6567 C++  Cplus1 ABC Publisher
+Delhi                                 300 15-JUL-95 S77
+
+
+SQL> update PROGRAMMER SET ProjId='NTTS', Language='C++', where EmpNo=201;
+update PROGRAMMER SET ProjId='NTTS', Language='C++', where EmpNo=201
+                                                     *
+ERROR at line 1:
+ORA-01747: invalid user.table.column, table.column, or column specification
+
+
+SQL> update PROGRAMMER SET ProjId='NTTS' where EmpNo=201;
+
+1 row updated.
+
+SQL> update PROGRAMMER SET Language='C++' where EmpNo=2-10;
+
+0 rows updated.
+
+SQL> update PROGRAMMER SET Language='C++' where EmpNo=201;
+
+1 row updated.
+
+SQL> update BOOKS SET ShelfNo='S10' where Title='DBMS';
+
+2 rows updated.
+
+SQL> ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow');
+ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow')
+                                                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow'));
+ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow'))
+                                                                                                  *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> ALTER TABLE WEATHER ADD (ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow')));
+
+Table altered.
