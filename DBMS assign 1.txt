@@ -9,12 +9,6 @@ CREATE TABLE PROGRAMMER (EmpNo NUMBER(5) PRIMARY KEY,
 
 Table created.
 
-SQL> INSERT INTO PROGRAMMER VALUES(201,'Gupta','Saurav',TO_DATE('1/1/1995','MM/DD/YYYY'),'NPR','VB',52,'Secret');
-INSERT INTO PROGRAMMER VALUES(201,'Gupta','Saurav',TO_DATE('1/1/1995','MM/DD/YYYY'),'NPR','VB',52,'Secret')
-                                                                                    *
-ERROR at line 1:
-ORA-01858: a non-numeric character was found where a numeric was expected
-
 
 SQL> INSERT INTO PROGRAMMER VALUES(201,'NPR','Gupta','Saurav',TO_DATE('1/1/1995','MM/DD/YYYY'),'VB',52,'Secret');
 
@@ -92,26 +86,6 @@ SQL> INSERT INTO WEATHER VALUES('Banglore','Karnataka',77,60);
 
 1 row created.
 
-SQL> alter table weather modify(state varchar(20) null);
-alter table weather modify(state varchar(20) null)
-                           *
-ERROR at line 1:
-ORA-01451: column to be modified to NULL cannot be modified to NULL
-
-
-SQL> alter table weather modify constarints(state null);
-alter table weather modify constarints(state null)
-                                      *
-ERROR at line 1:
-ORA-00902: invalid datatype
-
-
-SQL> alter table weather modify constarints(state varchar(20) null);
-alter table weather modify constarints(state varchar(20) null)
-                                      *
-ERROR at line 1:
-ORA-00902: invalid datatype
-
 
 SQL> desc weather;
  Name                                      Null?    Type
@@ -181,13 +155,6 @@ PLACEOFPUBLICATION                  PRICE PURCHASED SHE
 Delhi                                 300 15-JUL-95 S77
 
 
-SQL> update PROGRAMMER SET ProjId='NTTS', Language='C++', where EmpNo=201;
-update PROGRAMMER SET ProjId='NTTS', Language='C++', where EmpNo=201
-                                                     *
-ERROR at line 1:
-ORA-01747: invalid user.table.column, table.column, or column specification
-
-
 SQL> update PROGRAMMER SET ProjId='NTTS' where EmpNo=201;
 
 1 row updated.
@@ -203,19 +170,6 @@ SQL> update PROGRAMMER SET Language='C++' where EmpNo=201;
 SQL> update BOOKS SET ShelfNo='S10' where Title='DBMS';
 
 2 rows updated.
-
-SQL> ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow');
-ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow')
-                                                                                                 *
-ERROR at line 1:
-ORA-00907: missing right parenthesis
-
-
-SQL> ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow'));
-ALTER TABLE WEATHER ADD(ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow'))
-                                                                                                  *
-ERROR at line 1:
-ORA-00907: missing right parenthesis
 
 
 SQL> ALTER TABLE WEATHER ADD (ClimateType CHAR(6) CHECK(ClimateType in ('Rainy','Cloudy','Sunny','Snow')));
